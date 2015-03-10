@@ -11,7 +11,121 @@
   </head>
   <body>
     <div>The content is...</div>
-    <div id="braille-output">&#x2803</div>
+    <div id="braille-output">
+      <div>
+        <span id="0-0">&#x2803</span>
+        <span id="0-2">&#x2803</span>
+        <span id="0-4">&#x2803</span>
+        <span id="0-6">&#x2803</span>
+        <span id="0-8">&#x2803</span>
+        <span id="0-10">&#x2803</span>
+        <span id="0-12">&#x2803</span>
+        <span id="0-14">&#x2803</span>
+        <span id="0-16">&#x2803</span>
+        <span id="0-18">&#x2803</span>
+        <span id="0-20">&#x2803</span>
+        <span id="0-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="4-0">&#x2803</span>
+        <span id="4-2">&#x2803</span>
+        <span id="4-4">&#x2803</span>
+        <span id="4-6">&#x2803</span>
+        <span id="4-8">&#x2803</span>
+        <span id="4-10">&#x2803</span>
+        <span id="4-12">&#x2803</span>
+        <span id="4-14">&#x2803</span>
+        <span id="4-16">&#x2803</span>
+        <span id="4-18">&#x2803</span>
+        <span id="4-20">&#x2803</span>
+        <span id="4-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="8-0">&#x2803</span>
+        <span id="8-2">&#x2803</span>
+        <span id="8-4">&#x2803</span>
+        <span id="8-6">&#x2803</span>
+        <span id="8-8">&#x2803</span>
+        <span id="8-10">&#x2803</span>
+        <span id="8-12">&#x2803</span>
+        <span id="8-14">&#x2803</span>
+        <span id="8-16">&#x2803</span>
+        <span id="8-18">&#x2803</span>
+        <span id="8-20">&#x2803</span>
+        <span id="8-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="12-0">&#x2803</span>
+        <span id="12-2">&#x2803</span>
+        <span id="12-4">&#x2803</span>
+        <span id="12-6">&#x2803</span>
+        <span id="12-8">&#x2803</span>
+        <span id="12-10">&#x2803</span>
+        <span id="12-12">&#x2803</span>
+        <span id="12-14">&#x2803</span>
+        <span id="12-16">&#x2803</span>
+        <span id="12-18">&#x2803</span>
+        <span id="12-20">&#x2803</span>
+        <span id="12-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="16-0">&#x2803</span>
+        <span id="16-2">&#x2803</span>
+        <span id="16-4">&#x2803</span>
+        <span id="16-6">&#x2803</span>
+        <span id="16-8">&#x2803</span>
+        <span id="16-10">&#x2803</span>
+        <span id="16-12">&#x2803</span>
+        <span id="16-14">&#x2803</span>
+        <span id="16-16">&#x2803</span>
+        <span id="16-18">&#x2803</span>
+        <span id="16-20">&#x2803</span>
+        <span id="16-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="20-0">&#x2803</span>
+        <span id="20-2">&#x2803</span>
+        <span id="20-4">&#x2803</span>
+        <span id="20-6">&#x2803</span>
+        <span id="20-8">&#x2803</span>
+        <span id="20-10">&#x2803</span>
+        <span id="20-12">&#x2803</span>
+        <span id="20-14">&#x2803</span>
+        <span id="20-16">&#x2803</span>
+        <span id="20-18">&#x2803</span>
+        <span id="20-20">&#x2803</span>
+        <span id="20-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="24-0">&#x2803</span>
+        <span id="24-2">&#x2803</span>
+        <span id="24-4">&#x2803</span>
+        <span id="24-6">&#x2803</span>
+        <span id="24-8">&#x2803</span>
+        <span id="24-10">&#x2803</span>
+        <span id="24-12">&#x2803</span>
+        <span id="24-14">&#x2803</span>
+        <span id="24-16">&#x2803</span>
+        <span id="24-18">&#x2803</span>
+        <span id="24-20">&#x2803</span>
+        <span id="24-22">&#x2803</span>
+      </div>
+      <div>
+        <span id="28-0">&#x2803</span>
+        <span id="28-2">&#x2803</span>
+        <span id="28-4">&#x2803</span>
+        <span id="28-6">&#x2803</span>
+        <span id="28-8">&#x2803</span>
+        <span id="28-10">&#x2803</span>
+        <span id="28-12">&#x2803</span>
+        <span id="28-14">&#x2803</span>
+        <span id="28-16">&#x2803</span>
+        <span id="28-18">&#x2803</span>
+        <span id="28-20">&#x2803</span>
+        <span id="28-22">&#x2803</span>
+      </div>
+
+    </div>
     <canvas id="myCanvas" width="578" height="400"></canvas>
     <script>
       function drawImage(imageObj) {
@@ -27,12 +141,33 @@
         
         console.log(data);
 
-        var testSlice = sliceOnePixel(data, 0);
-        var testPixelColor = parseBlackWhite(testSlice);
-        var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, 7, 0);
-        var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
-        var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
-        var testPrintBrailleData = printBrailleCode(testConvertBrailleData);
+        // var testSlice = sliceOnePixel(data, 0);
+        // var testPixelColor = parseBlackWhite(testSlice);
+        // var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, 7, 0);
+        // var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
+        // var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
+        // var testPrintBrailleData = printBrailleCode(testConvertBrailleData);
+
+
+        fullTest();
+
+        function fullTest()
+        {
+          for(var x=0;x<=imageObj.width;x=x+2)
+          {
+            for(var y=0;y<=imageObj.height;y=y+4)
+            {
+              var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, y, x);
+              var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
+              var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
+              var brailleIdSelector = y + "-" + x;
+              var testPrintBrailleData = printBrailleCode(brailleIdSelector, testConvertBrailleData);
+            }
+          } 
+        }
+
+
+
 
 
         function sliceOnePixel(targetData, targetDataSlice_i)
@@ -127,29 +262,32 @@
             var brailleDataString = pin[7] + pin[3] + pin[6] + pin[5] + pin[4] + pin[2] + pin[1] + pin[0];
             // Convert binary to hexadecimal
             hexNumValue = parseInt(brailleDataString, 2).toString(16);
+            hexNumValue = String(hexNumValue);
+          }
+
+          var testLength = hexNumValue.length;
+
+          if(testLength == 1)
+          {
+            hexNumValue = "0" + hexNumValue;
           }
           return hexNumValue;
         }
 
-        function printBrailleCode(brailleUnicodeText)
+        function printBrailleCode(selector, brailleUnicodeText)
         {
           var output = "&#x28" + brailleUnicodeText.toString();
-          var brailleOutput = document.createElement("div");
-          document.body.appendChild(brailleOutput);
-          document.getElementById("braille-output").innerHTML = output;
+          if(selector.length != 0 && selector != null)
+          {
+            var targetElement = document.getElementById(selector);
+            if(targetElement.length != 0)
+            {
+              document.getElementById(selector).innerHTML = output;
+            }
+            
+          }
+          
 
-        }
-
-
-
-        for(var i = 0; i < data.length; i += 4) {
-          var brightness = 0.34 * data[i] + 0.5 * data[i + 1] + 0.16 * data[i + 2];
-          // red
-          data[i] = brightness;
-          // green
-          data[i + 1] = brightness;
-          // blue
-          data[i + 2] = brightness;
         }
 
         // overwrite original image
@@ -163,6 +301,10 @@
 
       imageObj.src = 'images/sample-graphic.png';
       // // imageObj.src = 'images/darth-vader.jpg';
+
+
+
+
     </script>
   </body>
 </html>        
