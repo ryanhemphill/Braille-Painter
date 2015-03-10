@@ -10,6 +10,8 @@
     </style>
   </head>
   <body>
+    <div>The content is...</div>
+    <div id="braille-output">&#x2803</div>
     <canvas id="myCanvas" width="578" height="400"></canvas>
     <script>
       function drawImage(imageObj) {
@@ -27,8 +29,10 @@
 
         var testSlice = sliceOnePixel(data, 0);
         var testPixelColor = parseBlackWhite(testSlice);
-        var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, 4, 0);
+        var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, 7, 0);
         var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
+        var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
+        var testPrintBrailleData = printBrailleCode(testConvertBrailleData);
 
 
         function sliceOnePixel(targetData, targetDataSlice_i)
@@ -107,10 +111,6 @@
 
         }
 
-        var testArrayForConversion = ["1","0","0","1","0","0","1","0"];
-
-        var testHexConvert = parseToBrailleCharacter(testArrayForConversion)
-
 
         function parseToBrailleCharacter(targetBrailleCharacterData)
         {
@@ -129,6 +129,15 @@
             hexNumValue = parseInt(brailleDataString, 2).toString(16);
           }
           return hexNumValue;
+        }
+
+        function printBrailleCode(brailleUnicodeText)
+        {
+          var output = "&#x28" + brailleUnicodeText.toString();
+          var brailleOutput = document.createElement("div");
+          document.body.appendChild(brailleOutput);
+          document.getElementById("braille-output").innerHTML = output;
+
         }
 
 
