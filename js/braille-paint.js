@@ -1,6 +1,11 @@
       function drawImage(imageObj) {
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
+
+        // erase pre-existing images
+        context.fillStyle = "rgb(255,255,255)";
+        context.fillRect(0, 0, 150, 150);
+
         var x = 69;
         var y = 50;
 
@@ -241,9 +246,12 @@
       var imageToggleButton = $('.toggle-button');
       imageToggleButton.click(function()
         {
+
           $('#new-output').remove();
-          var imgName = $(this).text();
+
+          // place new image
           var imageObj = new Image();
+          var imgName = $(this).text();
           imageObj.src = 'images/' + imgName + '.png';
           drawImage(imageObj);
         });
