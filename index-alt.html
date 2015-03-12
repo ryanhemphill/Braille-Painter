@@ -160,12 +160,12 @@
 
         function fullTest()
         {
-          for(var x=0;x<imageObj.width;x=x+2)//for(var x=0;x<=imageObj.height;x=x+2)
+          for(var x=0;x<=imageObj.height;x=x+2)
           {
-            for(var y=0;y<=imageObj.height;y=y+4)
+            for(var y=0;y<=imageObj.width;y=y+4)
             {
               var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, y, x);
-              var testBrailleData = buildBrailleCharacterData(data, imageObj.width, testIndexPosition);
+              var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
               var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
               var brailleIdSelector = y + "-" + x;
               var testPrintBrailleData = printBrailleCode(brailleIdSelector, testConvertBrailleData);
@@ -211,12 +211,12 @@
 
         function convertPixelPositionToIndexDataPosition(targetImageData, targetImgHeight, targetImgWidth, pixelShiftTop, pixelShiftLeft)
         {
-          var pixelIndex = (pixelShiftTop * targetImgWidth) + pixelShiftLeft;
-          var indexPosition = pixelIndex * 4;
+          var pixelIndex = (pixelShiftLeft * targetImgHeight) + pixelShiftTop;
+          var indexPosition = pixelIndex * 3;
           return indexPosition;
         }
 
-        function buildBrailleCharacterData(targetImageData, targetImgWidth, indexPosition)
+        function buildBrailleCharacterData(targetImageData, targetImageHeight, indexPosition)
         {
           var brailleCharacterData = [];
           var pinPositions = indexPosition;
@@ -226,25 +226,25 @@
           pin1Data = sliceOnePixel(targetImageData, indexPosition);
           pin1 = parseBlackWhite(pin1Data);
 
-          pin2Data = sliceOnePixel(targetImageData, indexPosition           + (1 * targetImgWidth * 4));
+          pin2Data = sliceOnePixel(targetImageData, indexPosition + (1 * 3));
           pin2 = parseBlackWhite(pin2Data);
 
-          pin3Data = sliceOnePixel(targetImageData, indexPosition           + (2 * targetImgWidth * 4));
+          pin3Data = sliceOnePixel(targetImageData, indexPosition + (2 * 3));
           pin3 = parseBlackWhite(pin3Data);
 
-          pin4Data = sliceOnePixel(targetImageData, indexPosition           + (3 * targetImgWidth * 4));
+          pin4Data = sliceOnePixel(targetImageData, indexPosition + (3 * 3));
           pin4 = parseBlackWhite(pin4Data);
 
-          pin5Data = sliceOnePixel(targetImageData, indexPosition + (1 * 4));
+          pin5Data = sliceOnePixel(targetImageData, indexPosition           + (targetImageHeight * 3));
           pin5 = parseBlackWhite(pin5Data);
- 
-          pin6Data = sliceOnePixel(targetImageData, indexPosition + (1 * 4) + (1 * targetImgWidth * 4));
+
+          pin6Data = sliceOnePixel(targetImageData, indexPosition + (1 * 3) + (targetImageHeight * 3));
           pin6 = parseBlackWhite(pin6Data);
- 
-          pin7Data = sliceOnePixel(targetImageData, indexPosition + (1 * 4) + (2 * targetImgWidth * 4));
+
+          pin7Data = sliceOnePixel(targetImageData, indexPosition + (2 * 3) + (targetImageHeight * 3));
           pin7 = parseBlackWhite(pin7Data);
- 
-          pin8Data = sliceOnePixel(targetImageData, indexPosition + (1 * 4) + (3 * targetImgWidth * 4));
+
+          pin8Data = sliceOnePixel(targetImageData, indexPosition + (3 * 3) + (targetImageHeight * 3));
           pin8 = parseBlackWhite(pin8Data);
 
           console.log(pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8);
@@ -306,7 +306,7 @@
         drawImage(this);
       };
 
-      imageObj.src = 'images/zen.png';
+      imageObj.src = 'images/zen.jpg';
       // // imageObj.src = 'images/darth-vader.jpg';
 
 
