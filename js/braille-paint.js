@@ -1,13 +1,21 @@
-      function drawImage(imageObj) {
-        var canvas = document.getElementById('myCanvas');
+      function drawImage(imageObj, targetCanvasId) {
+        var canvas = document.getElementById(targetCanvasId);
+        // canvas.setAttribute('width', imageObj.width);
+        // canvas.setAttribute('height', imageObj.height);
         var context = canvas.getContext('2d');
+
+        var jcanvas = $("#" + targetCanvasId);
+        jcanvas
+          .attr('width', imageObj.width)
+          .attr('height', imageObj.height);
+
 
         // erase pre-existing images
         context.fillStyle = "rgb(255,255,255)";
-        context.fillRect(0, 0, 150, 150);
+        context.fillRect(0, 0, jcanvas.attr('width'), jcanvas.attr('height'));
 
-        var x = 69;
-        var y = 50;
+        var x = 1;
+        var y = 1;
 
         context.drawImage(imageObj, x, y);
 
@@ -236,7 +244,7 @@
       
       var imageObj = new Image();
       imageObj.onload = function() {
-        drawImage(this);
+        drawImage(this, 'mycanvas');
       };
 
       imageObj.src = 'images/zen.png';
@@ -244,17 +252,35 @@
       // imageObj.src = 'images/gandalf.png';
 
       var imageToggleButton = $('.toggle-button');
-      imageToggleButton.click(function()
+      imageToggleButton
+        .click(function()
         {
+          var imgName = $(this).text();
+          var urlSource = 'images/' + imgName + '.png';
+          toggleImage(urlSource);
+        })
+        .keydown(function(event)
+        {
+          if(event.keyCode == 13)
+          {
+            var imgName = $(this).text();
+            var urlSource = 'images/' + imgName + '.png';
+            toggleImage(urlSource);
+          }
 
-          $('#new-output').remove();
+        });
+
+
+      function toggleImage(sourceURL)
+      {
+        $('#new-output').remove();
 
           // place new image
           var imageObj = new Image();
-          var imgName = $(this).text();
-          imageObj.src = 'images/' + imgName + '.png';
-          drawImage(imageObj);
-        });
+          imageObj.src = sourceURL;
+          drawImage(imageObj, 'mycanvas');
+
+      }
 
 
 
