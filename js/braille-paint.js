@@ -1,42 +1,26 @@
       function drawImage(imageObj, targetCanvasId) {
-        var canvas = document.getElementById(targetCanvasId);
-        // canvas.setAttribute('width', imageObj.width);
-        // canvas.setAttribute('height', imageObj.height);
-        var context = canvas.getContext('2d');
-
         var jcanvas = $("#" + targetCanvasId);
         jcanvas
           .attr('width', imageObj.width)
           .attr('height', imageObj.height);
 
-
-        // erase pre-existing images
-        context.fillStyle = "rgb(255,255,255)";
-        context.fillRect(0, 0, jcanvas.attr('width'), jcanvas.attr('height'));
+        var jcontext = jcanvas[0].getContext('2d');
+        jcontext.fillStyle = "rgb(255,255,255)";
+        jcontext.fillRect(0, 0, jcanvas.attr('width'), jcanvas.attr('height'));
 
         var x = 1;
         var y = 1;
 
-        context.drawImage(imageObj, x, y);
+        jcontext.drawImage(imageObj, x, y);
 
-        var imageData = context.getImageData(x, y, imageObj.width, imageObj.height);
+        var imageData = jcontext.getImageData(x, y, imageObj.width, imageObj.height);
         var data = imageData.data;
-        
-        console.log(data);
-
-        // var testSlice = sliceOnePixel(data, 0);
-        // var testPixelColor = parseBlackWhite(testSlice);
-        // var testIndexPosition = convertPixelPositionToIndexDataPosition(data, imageObj.height, imageObj.width, 7, 0);
-        // var testBrailleData = buildBrailleCharacterData(data, imageObj.height, testIndexPosition);
-        // var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
-        // var testPrintBrailleData = printBrailleCode(testConvertBrailleData);
-
 
         fullTest();
 
         function fullTest()
         {
-          for(var x=0;x<imageObj.width;x=x+2)//for(var x=0;x<=imageObj.height;x=x+2)
+          for(var x=0;x<imageObj.width;x=x+2)
           {
             for(var y=0;y<=imageObj.height;y=y+4)
             {
@@ -44,17 +28,10 @@
               var testBrailleData = buildBrailleCharacterData(data, imageObj.width, testIndexPosition);
               var testConvertBrailleData = parseToBrailleCharacter(testBrailleData);
               var brailleIdSelector = y + "-" + x;
-              // var brailleIdSelector = "" + x;
-              // var containerIdSelector = "" + y;
-              // var testPrintBrailleData = printBrailleCode(brailleIdSelector, testConvertBrailleData);
               var testPrintBrailleData = printBrailleCode(y, x, testConvertBrailleData, "new-output");
             }
           } 
         }
-
-
-
-
 
         function sliceOnePixel(targetData, targetDataSlice_i)
         {
@@ -62,7 +39,7 @@
           dataSlice.push(targetData[targetDataSlice_i])
           dataSlice.push(targetData[targetDataSlice_i + 1])
           dataSlice.push(targetData[targetDataSlice_i + 2]);
-          console.log(dataSlice);
+          // console.log(dataSlice);
           return dataSlice;
         }
 
@@ -75,16 +52,14 @@
           b = targetData[2];
           rgbTotal = r + b + g; 
 
-          if(rgbTotal > 380)
-          {
+          if(rgbTotal > 380) {
             blackOrWhitePixel = "0"; // white: no color, means no pin
           }
-          else
-          {
+          else {
             blackOrWhitePixel = "1"; // black, gets pin
           }
 
-          console.log(blackOrWhitePixel);
+          // console.log(blackOrWhitePixel);
           return blackOrWhitePixel;
         }
 
@@ -126,7 +101,7 @@
           pin8Data = sliceOnePixel(targetImageData, indexPosition + (1 * 4) + (3 * targetImgWidth * 4));
           pin8 = parseBlackWhite(pin8Data);
 
-          console.log(pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8);
+          // console.log(pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8);
           brailleCharacterData = [pin1,pin2,pin3,pin4,pin5,pin6,pin7,pin8];
           return brailleCharacterData;
 
@@ -213,43 +188,20 @@
             {
               yContainerDiv.append(newBrailleText);
             }
-
-
-            // if(selector.length != 0 && selector != null)
-            // {
-            //   var newBrailleText = $('<span></span>')
-            //                         .attr('id', selector)
-            //                         .html(output);
-            //   if(targetContainerId.length != 0)
-            //   {
-            //     var targetContainer = $('id', targetContainerId);
-            //     if(targetContainer.length == 0) // container not found in DOM
-            //     {
-            //       targetContainer = $('<div></div>')
-            //                           .attr('id', targetContainerId)
-            //                           .append(newBrailleText);
-            //     }
-            //     else // append to end of existing container
-            //     {
-
-            //     }
-            //   }
-            // }  
           }
         }
 
         // overwrite original image
-        context.putImageData(imageData, x, y);
+        jcontext.putImageData(imageData, x, y);
       }
       
       var imageObj = new Image();
+      imageObj.src = 'images/zen.png'; // default image
       imageObj.onload = function() {
         drawImage(this, 'mycanvas');
       };
 
-      imageObj.src = 'images/zen.png';
-      // imageObj.src = 'images/vader.png';
-      // imageObj.src = 'images/gandalf.png';
+      
 
       var imageToggleButton = $('.toggle-button');
       imageToggleButton
@@ -267,19 +219,17 @@
             var urlSource = 'images/' + imgName + '.png';
             toggleImage(urlSource);
           }
-
         });
 
 
       function toggleImage(sourceURL)
       {
         $('#new-output').remove();
-
-          // place new image
-          var imageObj = new Image();
-          imageObj.src = sourceURL;
+        var imageObj = new Image();
+        imageObj.src = sourceURL;
+        imageObj.onload = function() {
           drawImage(imageObj, 'mycanvas');
-
+        };
       }
 
 
